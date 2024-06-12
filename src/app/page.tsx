@@ -15,20 +15,27 @@ export default function HomePage() {
   const today = new Date();
   const DD = today.getDate();
   const MM = today.getMonth() + 1;
-  const month = today.toLocaleString('default', { month: 'long' }); // Get the full month name
+  const month = today.toLocaleString('default', { month: 'long' });
 
   const dayWithSuffix = `${DD}${getOrdinalSuffix(DD)}`;
 
   return (
-    <main className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-      <h1 className="text-4xl font-bold">
+    <main className="container flex flex-col items-center justify-center gap-4 sm:gap-12 px-4 py-2 sm:py-16 mx-auto max-w-7xl overflow-clip">
+      <h1 className="sm:text-4xl font-bold text-balance sm:text-center text-3xl">
         Discover events that have happened on the {dayWithSuffix} day of {month} in history
       </h1>
       <Link
         href={`/en/onthisday/all/${DD}/${MM}`}
-        className="text-blue-600 underline"
+        className={'group/button rounded-lg bg-brand_prose text-black'}
+        prefetch={true}
       >
-        <h2>What happened on {dayWithSuffix} {month}?</h2>
+        <span
+          className={
+            'block -translate-x-1 -translate-y-1 rounded-lg border-2 border-brand_prose bg-brand_secondary_light px-4 py-1 font-bold tracking-tight transition-all group-hover/button:-translate-y-2 group-active/button:translate-x-0 group-active/button:translate-y-0 text-lg sm:text-xl text-center text-balance'
+          }
+        >
+          What happened on {dayWithSuffix} {month}?
+        </span>
       </Link>
     </main>
   );
