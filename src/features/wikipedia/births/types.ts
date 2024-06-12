@@ -1,47 +1,72 @@
-"use client";
+export interface OnThisDayPageProps {
+  params: {
+    language: string;
+    type: string;
+    MM: string;
+    DD: string;
+  }
+}
 
-import React from "react";
-import { QueryClient, QueryClientProvider, type QueryClientConfig } from '@tanstack/react-query';
-import { type OnThisDayPageProps } from "~/features/wikipedia/births/types";
-import { getDateInfo } from "~/features/wikipedia/utilities";
+export interface WikipediaApiBirthTypeResponse {
+  births: Birth[];
+}
 
-const queryClientConfig: QueryClientConfig = {
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-};
+interface Birth {
+  text: string;
+  pages: Page[];
+}
 
-const queryClient = new QueryClient(queryClientConfig);
+interface Page {
+  type: string;
+  title: string;
+  displaytitle: string;
+  namespace: Namespace;
+  wikibase_item: string;
+  titles: Titles;
+  pageid: number;
+  thumbnail?: Image;
+  originalimage?: Image;
+  lang: string;
+  dir: string;
+  revision: string;
+  tid: string;
+  timestamp: string;
+  description?: string;
+  description_source?: string;
+  content_urls: ContentUrls;
+  extract: string;
+  extract_html: string;
+  normalizedtitle: string;
+}
 
+interface Namespace {
+  id: number;
+  text: string;
+}
 
-const OnThisDayPage: React.FC<OnThisDayPageProps> = ({ params }) => {
-  const { month, dayWithSuffix } = getDateInfo(parseInt(params.DD), parseInt(params.MM));
-  return (
-    <QueryClientProvider client={queryClient}>
+interface Titles {
+  canonical: string;
+  normalized: string;
+  display: string;
+}
 
-      <main className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <div>
-          <div>
-            <h1>Who was born on the {dayWithSuffix} of {month}?</h1>
-            {/* <ul>
-            {data.births.map((birth) => (
-              <li key={birth.text}>
-                <a href={`/en/onthisday/birth/${birth.pages[0]?.title}`}>
-                  {birth.text}
-                </a>
-              </li>
-            ))}
-          </ul> */}
-          </div>
-        </div>
-      </main>
-    </QueryClientProvider>
-  )
-};
+interface Image {
+  source: string;
+  width: number;
+  height: number;
+}
 
-export default OnThisDayPage;
+interface ContentUrls {
+  desktop: PlatformUrls;
+  mobile: PlatformUrls;
+}
+
+interface PlatformUrls {
+  page: string;
+  revisions: string;
+  edit: string;
+  talk: string;
+}
 
 // {
 //   births: [
