@@ -1,10 +1,12 @@
 export interface OnThisDayPageProps {
-  params: {
-    language: string;
-    type: string;
-    MM: string;
-    DD: string;
-  }
+  params: GetTodayInHistoryParams
+}
+
+export interface GetTodayInHistoryParams {
+  language: string;
+  type: string;
+  MM: string;
+  DD: string;
 }
 
 export interface WikipediaApiBirthTypeResponse {

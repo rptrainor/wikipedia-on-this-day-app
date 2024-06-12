@@ -6,10 +6,9 @@ import { getTodayInHistory } from "~/features/wikipedia/utilities";
 const OnThisDayPage: React.FC<OnThisDayPageProps> = async ({ params }) => {
   let data;
   try {
-    data = await getTodayInHistory({ params });
+    data = await getTodayInHistory({ language: params.language, type: params.type, MM: params.MM, DD: params.DD });
   } catch (error) {
-    console.error('Error fetching data:', error);
-    return <div>Error fetching data</div>;
+    throw new Error('Error fetching data');
   }
 
   return (

@@ -1,15 +1,7 @@
-import { type WikipediaApiBirthTypeResponse, type OnThisDayPageProps } from "~/features/wikipedia/births/types";
+import { type WikipediaApiBirthTypeResponse, type GetTodayInHistoryParams } from "~/features/wikipedia/births/types";
 
-export async function getTodayInHistory({
-  params: {
-    language,
-    type,
-    MM,
-    DD,
-  }
-}: OnThisDayPageProps) {
+export const getTodayInHistory = async ({ language, type, MM, DD }: GetTodayInHistoryParams) => {
   const url = `https://api.wikimedia.org/feed/v1/wikipedia/${language}/onthisday/${type}/${MM}/${DD}`;
-
   const response = await fetch(url, {
     headers: {
       'Authorization': `Bearer ${process.env.WIKIPEDIA_ACCESS_TOKEN}`,
@@ -21,9 +13,9 @@ export async function getTodayInHistory({
     throw new Error(`Error fetching data: ${response.statusText}`);
   }
 
-  const data = await response.json() as WikipediaApiBirthTypeResponse;
-  return data;
-}
+  return response.json() as Promise<WikipediaApiBirthTypeResponse>;
+};
+
 
 function getOrdinalSuffix(day: number): string {
   if (day > 3 && day < 21) return 'th';
@@ -44,7 +36,7 @@ interface DateInfo {
 
 export const getDateInfo = (inputDD?: number, inputMM?: number): DateInfo => {
   const today = new Date();
-  
+
   const DD = inputDD ?? today.getDate();
   const MM = inputMM ?? today.getMonth() + 1;
   const month = new Date(today.getFullYear(), MM - 1, DD).toLocaleString('default', { month: 'long' });
