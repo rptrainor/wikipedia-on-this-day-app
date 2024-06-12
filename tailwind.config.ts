@@ -16,7 +16,14 @@ export default {
         "brand_gray_dark": "#7A7A7B",
         "brand_background": "#F5F5F5",
         "brand_prose": "#333333",
-      }
+      },
+      screens: {
+        "xs": "320px",
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px",
+      },
     },
   },
   plugins: [],

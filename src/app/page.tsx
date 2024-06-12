@@ -20,8 +20,8 @@ export default function HomePage() {
   const dayWithSuffix = `${DD}${getOrdinalSuffix(DD)}`;
 
   return (
-    <main className="container flex flex-col items-center justify-center gap-4 sm:gap-12 px-4 py-2 sm:py-16 mx-auto max-w-7xl overflow-clip">
-      <h1 className="sm:text-4xl font-bold text-balance sm:text-center text-3xl">
+    <main className="container flex flex-col items-center justify-center gap-4 xs:gap-12 px-4 pt-2 xs:pt-[20vh] mx-auto max-w-7xl overflow-clip">
+      <h1 className="xs:text-4xl font-bold text-balance xs:text-center text-3xl">
         Discover events that have happened on the {dayWithSuffix} day of {month} in history
       </h1>
       <Link
@@ -31,7 +31,7 @@ export default function HomePage() {
       >
         <span
           className={
-            'block -translate-x-1 -translate-y-1 rounded-lg border-2 border-brand_prose bg-brand_secondary_light px-4 py-1 font-bold tracking-tight transition-all group-hover/button:-translate-y-2 group-active/button:translate-x-0 group-active/button:translate-y-0 text-lg sm:text-xl text-center text-balance'
+            'block -translate-x-1 -translate-y-1 rounded-lg border-2 border-brand_prose bg-brand_secondary_light px-4 py-1 font-bold tracking-tight transition-all group-hover/button:-translate-y-2 group-active/button:translate-x-0 group-active/button:translate-y-0 text-lg xs:text-xl text-center text-balance'
           }
         >
           What happened on {dayWithSuffix} {month}?
