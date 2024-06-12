@@ -11,6 +11,8 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    WIKIPEDIA_ACCESS_TOKEN: z.string(),
+    WIKIPEDIA_APP_NAME: z.string(),
   },
 
   /**
@@ -29,6 +31,8 @@ export const env = createEnv({
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
+    WIKIPEDIA_ACCESS_TOKEN: process.env.WIKIPEDIA_ACCESS_TOKEN,
+    WIKIPEDIA_APP_NAME: process.env.WIKIPEDIA_APP_NAME,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
