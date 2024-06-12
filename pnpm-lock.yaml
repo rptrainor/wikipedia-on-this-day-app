@@ -14,9 +14,6 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: ^0.10.1
         version: 0.10.1(typescript@5.4.5)(zod@3.23.8)
-      '@tanstack/react-query':
-        specifier: ^5.44.0
-        version: 5.44.0(react@18.3.1)
       drizzle-orm:
         specifier: ^0.30.10
         version: 0.30.10(@libsql/client@0.6.2)(@types/react@18.3.3)(react@18.3.1)
@@ -576,14 +573,6 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
-
-  '@tanstack/query-core@5.44.0':
-    resolution: {integrity: sha512-Fa1J7iEEyJnjXG1N4+Fz4OXNH/INve3XSn0Htms3X4wgRsXHxMDwqBE2XtDCts7swkwSIs4izEtaFqWVFr/eLQ==}
-
-  '@tanstack/react-query@5.44.0':
-    resolution: {integrity: sha512-zmaD6cw8P2cBOfRHhqRmwvDsAi56gqbiwG2CDR6oQOCXSDOvRagvpP6RUStn+RrfcVUrNjKsxBmrgG6Za8p5zg==}
-    peerDependencies:
-      react: ^18.0.0
 
   '@types/eslint@8.56.10':
     resolution: {integrity: sha512-Shavhk87gCtY2fhXDctcfS3e6FdxWkCx1iUZ9eEUbh7rTqlZT0/IzOkCOVt0fCjcFuZ9FPYfuezTBImfHCDBGQ==}
@@ -2631,13 +2620,6 @@ snapshots:
       zod: 3.23.8
     optionalDependencies:
       typescript: 5.4.5
-
-  '@tanstack/query-core@5.44.0': {}
-
-  '@tanstack/react-query@5.44.0(react@18.3.1)':
-    dependencies:
-      '@tanstack/query-core': 5.44.0
-      react: 18.3.1
 
   '@types/eslint@8.56.10':
     dependencies:
