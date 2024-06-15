@@ -1,6 +1,32 @@
 import Link from "next/link";
 
-import { getDateInfo } from "~/features/wikipedia/utilities";
+interface DateInfo {
+  DD: number;
+  MM: number;
+  month: string;
+  dayWithSuffix: string;
+}
+
+function getOrdinalSuffix(day: number): string {
+  if (day > 3 && day < 21) return 'th';
+  switch (day % 10) {
+    case 1: return 'st';
+    case 2: return 'nd';
+    case 3: return 'rd';
+    default: return 'th';
+  }
+}
+
+const getDateInfo = (inputDD?: number, inputMM?: number): DateInfo => {
+  const today = new Date();
+
+  const DD = inputDD ?? today.getDate();
+  const MM = inputMM ?? today.getMonth() + 1;
+  const month = new Date(today.getFullYear(), MM - 1, DD).toLocaleString('default', { month: 'long' });
+  const dayWithSuffix = `${DD}${getOrdinalSuffix(DD)}`;
+
+  return { DD, MM, month, dayWithSuffix };
+};
 
 export default function HomePage() {
   const { DD, MM, month, dayWithSuffix } = getDateInfo();
@@ -15,7 +41,7 @@ export default function HomePage() {
         </h1>
       </div>
       <Link
-        href={`/en/onthisday/births/${DD}/${MM}`}
+        href={`/birthdays/${MM}/${DD}`}
         className={'group/button rounded-lg bg-brand_prose text-black'}
         prefetch={true}
       >

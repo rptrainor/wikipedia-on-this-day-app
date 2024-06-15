@@ -10,12 +10,13 @@ export interface GetTodayInHistoryParams {
 }
 
 export interface WikipediaApiBirthTypeResponse {
-  births: Birth[];
+  births: BirthType[];
 }
 
-interface Birth {
+export interface BirthType {
+  pages: Page[]
   text: string;
-  pages: Page[];
+  year: number;
 }
 
 interface Page {
