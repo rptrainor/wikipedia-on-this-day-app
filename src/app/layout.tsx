@@ -1,4 +1,12 @@
 import "~/styles/globals.css";
+import { Montserrat as FontSans } from "next/font/google"
+
+import { cn } from "~/lib/utils";
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
 
 export const metadata = {
   title: "Wikipedia on this day app",
@@ -10,7 +18,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="bg-brand_background text-brand_prose">
       <head />
-      <body>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
         {children}
       </body>
     </html>
