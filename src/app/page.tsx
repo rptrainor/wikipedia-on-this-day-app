@@ -1,4 +1,6 @@
 import Link from "next/link";
+import CalendarComponent from "~/components/CalendarComponent";
+import DatePicker from "~/components/DatePicker";
 
 interface DateInfo {
   DD: number;
@@ -53,6 +55,7 @@ export default function HomePage() {
           Who was born on the {dayWithSuffix} of {month}?
         </span>
       </Link>
+      <DatePicker />
     </main>
   );
 }
