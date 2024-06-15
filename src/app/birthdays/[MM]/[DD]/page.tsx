@@ -1,27 +1,18 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query'
-
+import { Suspense } from 'react'
 import Births from './births'
 import fetchBirths from '~/server/actions/fetchBirths'
 
-export default async function PostsPage() {
-  const queryClient = new QueryClient()
+export default async function BirthdaysPage({ params }: { params: { MM: string, DD: string } }) {
 
-  const today = new Date();
-  const MM = String(today.getMonth() + 1).padStart(2, '0');
-  const DD = String(today.getDate()).padStart(2, '0');
-
-  await queryClient.prefetchQuery({
-    queryKey: ['births'],
-    queryFn: () => fetchBirths({ MM, DD }),
-  })
+  const response = await fetchBirths({ MM: params.MM, DD: params.DD })
+  const births = response.births;
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <Births />
-    </HydrationBoundary>
+    <>
+      <h1 className='text-black text-3xl'>Birthdays for {params.MM}/{params.DD}</h1>
+      <Suspense fallback={<div className='text-center w-full text-black text-4xl font-black'>Loading...</div>}>
+        <Births births={births} />
+      </Suspense>
+    </>
   )
 }

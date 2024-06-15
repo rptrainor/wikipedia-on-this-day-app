@@ -1,5 +1,4 @@
 import "~/styles/globals.css";
-import Providers from "~/providers/query-provider";
 
 export const metadata = {
   title: "Wikipedia on this day app",
@@ -12,8 +11,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="bg-brand_background text-brand_prose">
       <head />
       <body>
-        <Providers>{children}</Providers>
+        {children}
       </body>
     </html>
-  )
+  );
 }
