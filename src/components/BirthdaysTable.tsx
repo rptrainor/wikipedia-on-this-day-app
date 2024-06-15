@@ -26,7 +26,9 @@ interface BirthdaysTableProps {
 }
 
 const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    { id: 'year', desc: false }, // Default sorting by 'year' ascending
+  ]);
 
   const columns = useMemo<ColumnDef<BirthType>[]>(
     () => [
@@ -56,30 +58,15 @@ const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
     data,
     columns,
     state: {
-      sorting,
+      sorting
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
 
-  // const handleSearchBirths = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const searchValue = event.target.value.toLowerCase();
-  //   const results = data.filter(birth => birth.text.toLowerCase().includes(searchValue));
-  //   setSorting(results);
-  // };
-
   return (
     <div className="overflow-x-auto">
-      <div className='flex items-center gap-4 p-4'>
-        <h2>Search births</h2>
-        <Input
-          placeholder="Search births"
-          value={(table.getColumn("text")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("text")?.setFilterValue(event.target.value)}
-          className="max-w-sm"
-        /> 
-      </div>
       <Table className="min-w-full bg-white">
         <TableCaption>See all births for {new Date().toLocaleString('default', { month: 'long' })} {new Date().getFullYear()}</TableCaption>
         <TableHeader>
@@ -89,8 +76,11 @@ const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
                 <TableHead
                   key={header.id}
                   colSpan={header.colSpan}
-                  onClick={header.column.getToggleSortingHandler()}
-                  className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  onClick={() => {
+                    const isSorted = header.column.getIsSorted();
+                    header.column.toggleSorting(isSorted === 'asc');
+                  }}
+                  className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer w-24"
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
                   <span>
