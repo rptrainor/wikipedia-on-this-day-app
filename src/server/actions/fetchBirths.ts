@@ -1,6 +1,6 @@
 "use server"
 
-import { type WikipediaApiBirthTypeResponse } from "~/features/wikipedia/births/types";
+import { type WikipediaApiBirthTypeResponse, type BirthType } from "~/features/wikipedia/births/types";
 
 const fetchBirths = async ({ MM, DD }: { MM: string; DD: string }) => {
   const url = `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/births/${MM}/${DD}`;
@@ -13,7 +13,9 @@ const fetchBirths = async ({ MM, DD }: { MM: string; DD: string }) => {
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
-  return response.json() as Promise<WikipediaApiBirthTypeResponse>;
+  const data = await response.json() as WikipediaApiBirthTypeResponse;
+  data.births.sort((a: BirthType, b: BirthType) => a.year - b.year);
+  return data;
 }
 
 export default fetchBirths;
