@@ -26,7 +26,7 @@ interface BirthdaysTableProps {
 
 const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
   const [sorting, setSorting] = useState<SortingState>([
-    { id: 'year', desc: false }, // Default sorting by 'year' ascending
+    { id: 'year', desc: false },
   ]);
 
   const columns = useMemo<ColumnDef<BirthType>[]>(
@@ -39,7 +39,7 @@ const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
         accessorKey: 'text',
         header: 'Name',
         cell: (info) => (
-          <a href={`/en/onthisday/birth/${info.row.original.pages[0]?.title}`} className="text-blue-500 underline">
+          <a href={info.row.original.pages[0]?.content_urls?.desktop?.page} target="blank" className="text-blue-500 underline">
             {info.getValue() as string}
           </a>
         ),
