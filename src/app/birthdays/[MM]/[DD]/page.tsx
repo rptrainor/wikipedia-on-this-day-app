@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
-import Births from './births'
+
+import Births from '~/app/birthdays/[MM]/[DD]/births'
 import fetchBirths from '~/server/actions/fetchBirths'
 
 export default async function BirthdaysPage({ params }: { params: { MM: string, DD: string } }) {
