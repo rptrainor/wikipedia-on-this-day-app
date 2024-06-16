@@ -6,6 +6,9 @@ import { type WikipediaApiBirthTypeResponse, type BirthType } from "~/types/Birt
 
 // Define the cached fetch function
 export const fetchBirths = cache(async ({ MM, DD }: { MM: string; DD: string }) => {
+  if (!MM || !DD) {
+    throw new Error('Month and date are required');
+  }
   const url = `https://api.wikimedia.org/feed/v1/wikipedia/en/onthisday/births/${MM}/${DD}`;
   const response = await fetch(url, {
     headers: {

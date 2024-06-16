@@ -17,11 +17,13 @@ export default async function BirthdaysPage({ params }: { params: { MM: string, 
 
   return (
     <div className="flex flex-col gap-4 max-w-5xl mx-auto">
-      <div className='flex py-2 pt-3 gap-4 justify-between items-end xs:flex-row flex-col px-2'>
-      <h1 className='text-2xl lowercase leading-tight pb-8'>{`Birthdays on ${monthName} ${getOrdinalSuffix(dayNumber)}`}</h1>
-        <DatePicker />
+      <div className='py-2 pt-3 gap-2 justify-between items-end xs:items-start xs:flex-row flex-col px-2 flex xs:grid xs:grid-cols-2'>
+        <h1 className='sm:text-2xl lowercase leading-tight text-balance'>{`Birthdays on ${monthName} ${getOrdinalSuffix(dayNumber)}`}</h1>
+        <div className='flex justify-end'>
+          <DatePicker />
+        </div>
       </div>
-      <Suspense fallback={<div className='text-center w-full text-black text-4xl font-black'>Loading...</div>}>
+      <Suspense fallback={<Births births={[]} />}>
         <Births births={births} />
       </Suspense>
     </div>

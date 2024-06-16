@@ -30,20 +30,24 @@ export default function HomePage() {
           This day in history
         </h1>
       </div>
-      <Link
-        href={`/birthdays/${MM}/${DD}`}
-        className={'group/button rounded-lg bg-brand_prose text-black'}
-        prefetch={true}
+      <div
+        className="flex flex-col gap-4 items-end"
       >
-        <span
-          className={
-            'block -translate-x-1 -translate-y-1 rounded-lg border-2 border-brand_prose bg-brand_secondary_light px-4 py-1 font-bold tracking-tight transition-all group-hover/button:-translate-y-2 group-active/button:translate-x-0 group-active/button:translate-y-0 text-lg sm:text-xl text-center text-pretty lowercase leading-tight'
-          }
+        <Link
+          href={`/birthdays/${MM}/${DD}`}
+          className={'group/button rounded-lg bg-brand_prose text-black'}
+          prefetch={true}
         >
-          Who was born on the {dayWithSuffix} of {month}?
-        </span>
-      </Link>
-      <DatePicker />
+          <span
+            className={
+              'block -translate-x-1 -translate-y-1 rounded-lg border-2 border-brand_prose bg-brand_secondary_light px-4 py-1 font-bold tracking-tight transition-all group-hover/button:-translate-y-2 group-active/button:translate-x-0 group-active/button:translate-y-0 text-lg sm:text-xl text-center text-pretty lowercase leading-tight'
+            }
+          >
+            Who was born on the {dayWithSuffix} of {month}?
+          </span>
+        </Link>
+        <DatePicker />
+      </div>
     </main>
   );
 }
