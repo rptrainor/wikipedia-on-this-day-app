@@ -18,7 +18,7 @@ import {
   type SortingState,
   type ColumnDef,
 } from '@tanstack/react-table';
-import { type BirthType } from '~/features/wikipedia/births/types';
+import { type BirthType } from '~/types/BirthdayTypes';
 
 interface BirthdaysTableProps {
   data: BirthType[];
