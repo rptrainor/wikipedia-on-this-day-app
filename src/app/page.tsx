@@ -8,7 +8,7 @@ interface DateInfo {
   dayWithSuffix: string;
 }
 
-function getOrdinalSuffix(day: number): string {
+export function getOrdinalSuffix(day: number): string {
   if (day > 3 && day < 21) return 'th';
   switch (day % 10) {
     case 1: return 'st';
