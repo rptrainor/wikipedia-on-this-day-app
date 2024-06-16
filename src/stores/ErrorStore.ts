@@ -1,19 +1,21 @@
 import { create } from 'zustand'
 
-const STATUS = ['200', '400', '500'] as const
+export const STATUS_OPTIONS = { 200: '200', 400: '400', 500: '500' } as const
 
 type Store = {
-  status: typeof STATUS[number]
+  status: typeof STATUS_OPTIONS[keyof typeof STATUS_OPTIONS]
   message: string
-  setStatus: (status: typeof STATUS[number]) => void
+  setStatus: (status: typeof STATUS_OPTIONS[keyof typeof STATUS_OPTIONS]) => void
   setMessage: (message: string) => void
+  resetError: () => void
 }
 
-const useErrorStore = create<Store>()((set) => ({
-  status: STATUS[0],
+const useErrorStore = create<Store>((set) => ({
+  status: STATUS_OPTIONS[200],
   message: '',
   setStatus: (status) => set({ status }),
   setMessage: (message) => set({ message }),
+  resetError: () => set({ status: STATUS_OPTIONS[200], message: '' }),
 }))
 
 export default useErrorStore

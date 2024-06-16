@@ -7,7 +7,7 @@ import {
 export function Modal({ children, isOpen, onClose }: { children: React.ReactNode, isOpen: boolean, onClose: () => void }) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose} modal>
-      <DialogContent className="sm:max-w-md xs:max-w-[calc(100vw-2rem)] w-auto h-auto mx-auto rounded-md xs:p-2 xs:pt-10">
+      <DialogContent className="max-w-md sm:max-w-[calc(100vw-2rem)] w-auto h-auto mx-auto rounded-md xs:p-2 xs:pt-10">
         {children}
       </DialogContent>
     </Dialog>

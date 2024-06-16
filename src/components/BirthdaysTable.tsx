@@ -79,7 +79,7 @@ const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
                     const isSorted = header.column.getIsSorted();
                     header.column.toggleSorting(isSorted === 'asc');
                   }}
-                  className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer w-24"
+                  className="py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer w-24 px-2"
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
                   <span>

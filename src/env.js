@@ -22,6 +22,7 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_SUPPORT_EMAIL_ADDRESS: z.string().email(),
   },
 
   /**
@@ -33,6 +34,7 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     WIKIPEDIA_ACCESS_TOKEN: process.env.WIKIPEDIA_ACCESS_TOKEN,
     WIKIPEDIA_APP_NAME: process.env.WIKIPEDIA_APP_NAME,
+    NEXT_PUBLIC_SUPPORT_EMAIL_ADDRESS: process.env.NEXT_PUBLIC_SUPPORT_EMAIL_ADDRESS,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

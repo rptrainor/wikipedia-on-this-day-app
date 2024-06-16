@@ -8,10 +8,6 @@ export default async function BirthdaysPage({ params }: { params: { MM: string, 
   const monthNumber = parseInt(params.MM, 10);
   const dayNumber = parseInt(params.DD, 10);
 
-  if (isNaN(monthNumber) || isNaN(dayNumber)) {
-    return <div>Invalid date</div>;
-  }
-
   preload({ MM: params.MM, DD: params.DD });
 
   const response = await fetchBirths({ MM: params.MM, DD: params.DD });
@@ -21,8 +17,8 @@ export default async function BirthdaysPage({ params }: { params: { MM: string, 
 
   return (
     <div className="flex flex-col gap-4 max-w-5xl mx-auto">
-      <div className='flex py-2 pt-3 gap-4 justify-between items-center'>
-      <h1 className='text-2xl lowercase'>{`Birthdays on ${monthName} ${getOrdinalSuffix(dayNumber)}`}</h1>
+      <div className='flex py-2 pt-3 gap-4 justify-between items-end xs:flex-row flex-col px-2'>
+      <h1 className='text-2xl lowercase leading-tight pb-8'>{`Birthdays on ${monthName} ${getOrdinalSuffix(dayNumber)}`}</h1>
         <DatePicker />
       </div>
       <Suspense fallback={<div className='text-center w-full text-black text-4xl font-black'>Loading...</div>}>
