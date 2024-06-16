@@ -1,21 +1,13 @@
 "use client"
 
-import { useEffect, useState } from 'react'
-
 import { Calendar } from "~/components/ui/calendar"
 
-const CalendarComponent = () => {
-  const [date, setDate] = useState<Date | undefined>(new Date())
-
-  useEffect(() => {
-    console.log({ date })
-  }, [date])
-
+const CalendarComponent = ({ onSelect }: { onSelect: (date: Date) => void }) => {
   return (
     <Calendar
       mode="single"
-      selected={date}
-      onSelect={setDate}
+      selected={new Date()}
+      onSelect={(day) => onSelect(day ?? new Date())}
     />
   )
   
