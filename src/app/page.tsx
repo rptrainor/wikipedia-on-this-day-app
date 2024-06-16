@@ -13,7 +13,7 @@ const getDateInfo = ({ date }: { date: Date }): DateInfo => {
   const DD = date.getDate();
   const MM = date.getMonth() + 1;
   const month = new Date(date.getFullYear(), MM - 1, DD).toLocaleString('default', { month: 'long' });
-  const dayWithSuffix = `${DD}${getOrdinalSuffix(DD)}`;
+  const dayWithSuffix = `${getOrdinalSuffix(DD)}`;
 
   return { DD, MM, month, dayWithSuffix };
 };
