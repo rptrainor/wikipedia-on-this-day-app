@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DatePicker from "~/components/DatePicker";
+import { getOrdinalSuffix } from "~/lib/utils";
 
 interface DateInfo {
   DD: number;
@@ -8,17 +9,7 @@ interface DateInfo {
   dayWithSuffix: string;
 }
 
-export function getOrdinalSuffix(day: number): string {
-  if (day > 3 && day < 21) return 'th';
-  switch (day % 10) {
-    case 1: return 'st';
-    case 2: return 'nd';
-    case 3: return 'rd';
-    default: return 'th';
-  }
-}
-
-export const getDateInfo = ({ date }: { date: Date }): DateInfo => {
+const getDateInfo = ({ date }: { date: Date }): DateInfo => {
   const DD = date.getDate();
   const MM = date.getMonth() + 1;
   const month = new Date(date.getFullYear(), MM - 1, DD).toLocaleString('default', { month: 'long' });

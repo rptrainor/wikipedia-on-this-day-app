@@ -1,20 +1,8 @@
 import { Suspense } from 'react';
 import Births from '~/app/birthdays/[MM]/[DD]/births';
-import { getOrdinalSuffix } from '~/app/page';
+import { getOrdinalSuffix, getMonthName } from "~/lib/utils";
 import DatePicker from '~/components/DatePicker';
 import fetchBirths from '~/server/actions/fetchBirths';
-
-const MONTH_NAMES = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-] as const;
-
-function getMonthName(monthNumber: number): typeof MONTH_NAMES[number] | null {
-  if (monthNumber < 1 || monthNumber > 12) {
-    return null;
-  }
-  return MONTH_NAMES[monthNumber - 1] ?? null;
-}
 
 export default async function BirthdaysPage({ params }: { params: { MM: string, DD: string } }) {
   const monthNumber = parseInt(params.MM, 10);
