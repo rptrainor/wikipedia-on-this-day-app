@@ -33,10 +33,14 @@
   "include": [
     ".eslintrc.cjs",
     "next-env.d.ts",
+    "jest.config.ts",
+    "jest.setup.js",
     "**/*.ts",
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
+    "**/*.test.ts",
+    "**/*.test.tsx",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]

@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-
 import {
   Table,
   TableBody,
@@ -8,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table"
-
 import {
   useReactTable,
   getCoreRowModel,
@@ -16,6 +14,7 @@ import {
   flexRender,
   type SortingState,
   type ColumnDef,
+  type Header
 } from '@tanstack/react-table';
 import { type BirthType } from '~/types/BirthdayTypes';
 
@@ -28,6 +27,11 @@ const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
     { id: 'year', desc: false },
   ]);
 
+  const handleHeaderClick = (header: Header<BirthType, unknown>) => {
+    const isSorted = header.column.getIsSorted();
+    header.column.toggleSorting(isSorted === 'asc');
+  };
+
   const columns = useMemo<ColumnDef<BirthType>[]>(
     () => [
       {
@@ -38,7 +42,7 @@ const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
         accessorKey: 'text',
         header: 'Name',
         cell: (info) => (
-          <a href={info.row.original.pages[0]?.content_urls?.desktop?.page} target="blank" className="text-blue-500 underline">
+          <a href={info.row.original.pages[0]?.content_urls?.desktop?.page} target="_blank" className="text-blue-500 underline">
             {info.getValue() as string}
           </a>
         ),
@@ -73,10 +77,7 @@ const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
                 <TableHead
                   key={header.id}
                   colSpan={header.colSpan}
-                  onClick={() => {
-                    const isSorted = header.column.getIsSorted();
-                    header.column.toggleSorting(isSorted === 'asc');
-                  }}
+                  onClick={() => handleHeaderClick(header)}
                   className="py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider cursor-pointer w-24 px-2"
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
