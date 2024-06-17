@@ -11,9 +11,6 @@ export const fetchBirths = cache(async ({ MM, DD }: { MM: string; DD: string }) 
     headers: {
       'Authorization': `Bearer ${process.env.WIKIPEDIA_ACCESS_TOKEN}`,
       'Api-User-Agent': `${process.env.WIKIPEDIA_APP_NAME}`,
-    },
-    next: {
-      revalidate: 60 * 60 * 24 * 7,
     }
   });
   if (!response.ok) {
