@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Modal } from '~/components/Modal';
 
 jest.mock('~/components/ui/dialog', () => ({
-  Dialog: ({ open, onOpenChange, children }: { open: boolean, onOpenChange: () => void, children: React.ReactNode }) => (
+  Dialog: ({ open, children }: { open: boolean, onOpenChange: () => void, children: React.ReactNode }) => (
     open ? <div>{children}</div> : null
   ),
   DialogContent: ({ children, className }: { children: React.ReactNode, className: string }) => (
