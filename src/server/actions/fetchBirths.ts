@@ -14,7 +14,6 @@ export const fetchBirths = cache(async ({ MM, DD }: { MM: string; DD: string }) 
     }
   });
   if (!response.ok) {
-    console.error('response', response)
     return new Error('Network response was not ok');
   }
   const data = await response.json() as WikipediaApiBirthTypeResponse;
