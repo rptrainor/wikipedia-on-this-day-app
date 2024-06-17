@@ -14,8 +14,7 @@ export const fetchBirths = cache(async ({ MM, DD }: { MM: string; DD: string }) 
     },
     next: {
       revalidate: 60 * 60 * 24 * 7,
-    },
-    cache: 'force-cache' 
+    }
   });
   if (!response.ok) {
     console.error('response', response)
