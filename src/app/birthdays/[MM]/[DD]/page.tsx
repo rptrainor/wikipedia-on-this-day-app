@@ -1,19 +1,25 @@
 import { Suspense } from 'react';
+
 import Births from '~/app/birthdays/[MM]/[DD]/births';
 import { getOrdinalSuffix, getMonthName } from '~/lib/utils';
 import DatePicker from '~/components/DatePicker';
 import { preload, fetchBirths } from '~/server/actions/fetchBirths';
+import { type WikipediaApiBirthTypeResponse } from '~/types/BirthdayTypes';
 
 export default async function BirthdaysPage({ params }: { params: { MM: string, DD: string } }) {
   const monthNumber = parseInt(params.MM, 10);
   const dayNumber = parseInt(params.DD, 10);
 
   preload({ MM: params.MM, DD: params.DD });
-
-  const response = await fetchBirths({ MM: params.MM, DD: params.DD });
-  const births = response.births;
-
   const monthName = getMonthName(monthNumber);
+  let births = []
+
+  try {
+    const response = await fetchBirths({ MM: params.MM, DD: params.DD }) as WikipediaApiBirthTypeResponse;
+    births = response.births;
+  } catch (error) {
+    throw new Error('Something went wrong');
+  }
 
   return (
     <div className="flex flex-col gap-4 max-w-5xl mx-auto">
@@ -23,7 +29,7 @@ export default async function BirthdaysPage({ params }: { params: { MM: string, 
           <DatePicker />
         </div>
       </div>
-      <Suspense fallback={<Births births={[]} />}>
+      <Suspense fallback={<Births births={births} />}>
         <Births births={births} />
       </Suspense>
     </div>

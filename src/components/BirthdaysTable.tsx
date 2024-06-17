@@ -3,7 +3,6 @@ import { useMemo, useState } from 'react';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -67,7 +66,6 @@ const BirthdaysTable: React.FC<BirthdaysTableProps> = ({ data }) => {
   return (
     <div className="overflow-x-auto shadow-2xl shadow-brand_primary_dark/50 rounded-lg">
       <Table className="min-w-full bg-white">
-        <TableCaption>See all births for {new Date().toLocaleString('default', { month: 'long' })} {new Date().getFullYear()}</TableCaption>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>

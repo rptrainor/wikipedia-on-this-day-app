@@ -15,15 +15,14 @@ export default function Error({
   const { setStatus, setMessage } = useErrorStore()
 
   useEffect(() => {
-    console.error({ error })
     setStatus(STATUS_OPTIONS[500])
     setMessage(error.message)
   }, [error, setStatus, setMessage])
 
   return (
-    <>
+    <div className="flex flex-col gap-4 max-w-5xl mx-auto text-black bg-background">
       <ErrorModal />
       {children}
-    </>
+    </div>
   )
 }
