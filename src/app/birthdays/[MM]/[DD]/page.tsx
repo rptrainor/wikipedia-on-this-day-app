@@ -4,7 +4,6 @@ import Births from '~/app/birthdays/[MM]/[DD]/births';
 import { getOrdinalSuffix, getMonthName } from '~/lib/utils';
 import DatePicker from '~/components/DatePicker';
 import { preload, fetchBirths } from '~/server/actions/fetchBirths';
-import { type WikipediaApiBirthTypeResponse } from '~/types/BirthdayTypes';
 
 export default async function BirthdaysPage({ params }: { params: { MM: string, DD: string } }) {
   const monthNumber = parseInt(params.MM, 10);
@@ -15,10 +14,11 @@ export default async function BirthdaysPage({ params }: { params: { MM: string, 
   let births = []
 
   try {
-    const response = await fetchBirths({ MM: params.MM, DD: params.DD }) as WikipediaApiBirthTypeResponse;
+    const response = await fetchBirths({ MM: params.MM, DD: params.DD })
+    if (response instanceof Error) throw response
     births = response.births;
   } catch (error) {
-    throw new Error('Something went wrong');
+    throw new Error('please enter a valid date');
   }
 
   return (

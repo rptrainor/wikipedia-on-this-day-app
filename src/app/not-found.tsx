@@ -3,14 +3,14 @@ export default function NotFound() {
     <html lang='en'>
       <head title='Wikipedia on this day app' />
       <body>
-        <main>
+        <main className="container flex flex-col items-center h-full min-h-screen xs:min-h-[60vh] sm:min-h-[40vh] justify-center gap-4 sm:gap-8 px-4 pt-2 sm:pt-[20vh] mx-auto max-w-7xl overflow-clip">
           <div className="flex flex-col items-center justify-end xs:justify-center gap-4 sm:gap-8 py-2 px-4 w-[calc(100vw-2rem)] max-w-md mx-auto h-[80vh] xs:h-auto overflow-scroll">
             <div className='flex flex-col gap-2'>
               <h1 className="w-full text-black sm:text-3xl text-base font-extrabold leading-tight text-balance lowercase">
                 We are sorry, but something went wrong:
               </h1>
               <small className="sm:text-xl text-xs uppercase font-semibold text-balance leading-tight">
-              We are sorry, but the page you are looking for does not exist
+                the page you are looking for does not exist
               </small>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 text-center w-full justify-end">
