@@ -35,7 +35,7 @@ describe('ErrorModal', () => {
 
   it('renders null when status is 200', () => {
     render(<ErrorModal />);
-    expect(screen.queryByText('We are sorry, but something went wrong:')).not.toBeInTheDocument();
+    expect(screen.queryByText('We are sorry, but something went wrong')).not.toBeInTheDocument();
   });
 
   it('renders modal when status is 400 or 500', () => {
@@ -47,7 +47,7 @@ describe('ErrorModal', () => {
 
     render(<ErrorModal />);
 
-    expect(screen.getByText('We are sorry, but something went wrong:')).toBeInTheDocument();
+    expect(screen.getByText('We are sorry, but something went wrong')).toBeInTheDocument();
   });
 
   it('calls resetError and router.replace when Home button is clicked', () => {
