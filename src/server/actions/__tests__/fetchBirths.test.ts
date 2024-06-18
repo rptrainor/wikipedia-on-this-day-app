@@ -47,5 +47,34 @@ describe('fetchBirths', () => {
 
     expect(result).toEqual(new Error('Network response was not ok'));
   });
-});
 
+  it('handles an empty response', async () => {
+    const mockResponse = {
+      births: []
+    } as WikipediaApiBirthTypeResponse;
+
+    (fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      json: async () => mockResponse,
+    });
+
+    const result = await fetchBirths({ MM: '01', DD: '01' });
+
+    expect(result).toEqual({ births: [] });
+  });
+
+  it('handles unexpected data format', async () => {
+    const mockResponse = {
+      births: []
+    } as WikipediaApiBirthTypeResponse;
+
+    (fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      json: async () => mockResponse,
+    });
+
+    const result = await fetchBirths({ MM: '01', DD: '01' });
+
+    expect(result).toEqual({ births: [] });
+  });
+});

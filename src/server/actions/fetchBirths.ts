@@ -17,7 +17,7 @@ export const fetchBirths = cache(async ({ MM, DD }: { MM: string; DD: string }) 
     return new Error('Network response was not ok');
   }
   const data = await response.json() as WikipediaApiBirthTypeResponse;
-  data.births.sort((a: BirthType, b: BirthType) => a.year - b.year);
+  data.births?.sort((a: BirthType, b: BirthType) => a.year - b.year);
   return data;
 });
 
