@@ -1,0 +1,75 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import HomePage from '../page';
+import { getOrdinalSuffix } from '~/lib/utils';
+
+jest.mock('~/components/DatePicker', () => () => <div>DatePicker</div>);
+
+jest.mock('next/link', () => {
+  return ({ href, children }: { href: string, children: React.ReactNode }) => (
+    <a href={href}>{children}</a>
+  );
+});
+
+jest.mock('~/lib/utils', () => ({
+  getOrdinalSuffix: jest.fn(),
+}));
+
+describe('HomePage', () => {
+  beforeEach(() => {
+    (getOrdinalSuffix as jest.Mock).mockImplementation((day: number) => {
+      if (day === 1) return '1st';
+      if (day === 2) return '2nd';
+      if (day === 3) return '3rd';
+      return `${day}th`;
+    });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should render without crashing', () => {
+    render(<HomePage />);
+  });
+
+  it('renders the correct day and month', () => {
+    render(<HomePage />);
+
+    const today = new Date();
+    const DD = today.getDate();
+    const MM = today.getMonth() + 1;
+    const month = today.toLocaleString('default', { month: 'long' });
+    const dayWithSuffix = getOrdinalSuffix(DD);
+
+    expect(screen.getByText(`Who was born on the ${dayWithSuffix} of ${month}?`)).toBeInTheDocument();
+  });
+
+  it('displays the "Who was born on..." text', () => {
+    render(<HomePage />);
+
+    expect(screen.getByText('Who was born on…')).toBeInTheDocument();
+    expect(screen.getByText('This day in history')).toBeInTheDocument();
+  });
+
+  it('links to the correct URL', () => {
+    render(<HomePage />);
+
+    const today = new Date();
+    const DD = today.getDate();
+    const MM = today.getMonth() + 1;
+
+    const link = screen.getByRole('link', {
+      name: /Who was born on the/,
+    });
+
+    expect(link).toHaveAttribute('href', `/birthdays/${MM}/${DD}`);
+  });
+
+  it('renders the DatePicker component', () => {
+    render(<HomePage />);
+
+    expect(screen.getByText('DatePicker')).toBeInTheDocument();
+  });
+});
