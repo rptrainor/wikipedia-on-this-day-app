@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { NotFoundContent } from '../not-found';
+
+import NotFoundContent from '../NotFoundContent';
 
 describe('NotFoundContent', () => {
   beforeEach(() => {

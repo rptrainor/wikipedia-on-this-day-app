@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { GlobalErrorContent } from '../global-error';
+
+import { GlobalErrorContent } from '../GlobalErrorContent';
 import { useRouter } from 'next/router';
 import useErrorStore, { STATUS_OPTIONS } from '~/stores/ErrorStore';
 

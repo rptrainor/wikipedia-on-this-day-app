@@ -1,12 +1,6 @@
 import "~/styles/globals.css";
-import { Montserrat as FontSans } from "next/font/google";
 
-import { cn } from "~/lib/utils";
-
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+import RootLayoutContent from "~/components/RootLayoutContent";
 
 export const metadata = {
   title: "Wikipedia on this day app",
@@ -14,19 +8,7 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export function RootLayoutContent({ children }: { children: React.ReactNode }) {
-  return (
-    <div
-      className={cn(
-        "min-h-screen bg-background font-sans antialiased font-semibold text-lg",
-        fontSans.variable
-      )}
-    >
-      {children}
-    </div>
-  );
-}
-
+//* RootLayoutContent is exported here because testing library does not support testing a page with an <html> tag but the this layout component needs rendered inside the <html> tag. 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="bg-brand_background text-brand_prose">
