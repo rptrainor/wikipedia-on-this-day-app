@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import HomePage from '../page';
+
+import HomePage from '~/app/page';
 import { getOrdinalSuffix } from '~/lib/utils';
 
 jest.mock('~/components/DatePicker', () => () => <div>DatePicker</div>);

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+
 import useErrorStore, { STATUS_OPTIONS } from '~/stores/ErrorStore'
 import ErrorModal from '~/components/ErrorModal'
 

@@ -1,4 +1,4 @@
-import { fetchBirths } from '../fetchBirths';
+import { fetchBirths } from '~/server/actions/fetchBirths';
 import { type WikipediaApiBirthTypeResponse } from '~/types/BirthdayTypes';
 
 global.fetch = jest.fn();

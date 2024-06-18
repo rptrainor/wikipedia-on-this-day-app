@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import BirthdaysPage from '../page';
+
+import BirthdaysPage from '~/app/birthdays/[MM]/[DD]/page';
 import { preload, fetchBirths } from '~/server/actions/fetchBirths';
 import { getMonthName, getOrdinalSuffix } from '~/lib/utils';
 

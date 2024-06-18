@@ -1,4 +1,4 @@
-import useErrorStore, { STATUS_OPTIONS } from '../ErrorStore';
+import useErrorStore, { STATUS_OPTIONS } from '~/stores/ErrorStore';
 
 describe('useErrorStore', () => {
   afterEach(() => {

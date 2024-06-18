@@ -1,8 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+
 import useErrorStore, { STATUS_OPTIONS } from '~/stores/ErrorStore';
-import { Modal } from './Modal';
+import { Modal } from '~/components/Modal';
 
 const ErrorModal = () => {
   const { status, resetError } = useErrorStore();

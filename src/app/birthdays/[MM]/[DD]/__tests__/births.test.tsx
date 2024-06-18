@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Births from '../births';
+
+import Births from '~/app/birthdays/[MM]/[DD]/births';
 import { BirthType } from '~/types/BirthdayTypes';
 
 jest.mock('~/components/BirthdaysTable', () => (props: { data: BirthType[] }) => (

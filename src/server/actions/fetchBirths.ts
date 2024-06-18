@@ -2,6 +2,7 @@
 
 import { cache } from 'react';
 import 'server-only';
+
 import { type WikipediaApiBirthTypeResponse, type BirthType } from "~/types/BirthdayTypes";
 
 export const fetchBirths = cache(async ({ MM, DD }: { MM: string; DD: string }) => {

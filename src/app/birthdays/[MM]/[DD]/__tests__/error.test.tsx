@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import ErrorComponent from '../error'; 
+import ErrorComponent from '~/app/birthdays/[MM]/[DD]/error';
 import useErrorStore, { STATUS_OPTIONS } from '~/stores/ErrorStore';
 
 jest.mock('~/stores/ErrorStore', () => {
