@@ -35,7 +35,7 @@ export default function GlobalError({
           <div className="flex flex-col items-center justify-end xs:justify-center gap-4 sm:gap-8 py-2 px-4 w-[calc(100vw-2rem)] max-w-md mx-auto h-[80vh] xs:h-auto overflow-scroll">
             <div className='flex flex-col gap-2'>
               <h1 className="w-full text-black sm:text-3xl text-base font-extrabold leading-tight text-balance lowercase">
-                We are sorry, but something went wrong:
+                We are sorry, but something went wrong
               </h1>
               <small className="sm:text-xl text-xs uppercase font-semibold text-balance leading-tight">{message}</small>
             </div>

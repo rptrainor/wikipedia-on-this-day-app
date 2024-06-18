@@ -16,7 +16,6 @@ jest.mock('~/stores/ErrorStore', () => {
   };
 });
 
-// Mock ErrorModal component
 jest.mock('~/components/ErrorModal', () => () => <div data-testid="error-modal">ErrorModal</div>);
 
 describe('ErrorComponent', () => {
