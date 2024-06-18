@@ -87,4 +87,22 @@ describe('ErrorModal', () => {
     const contactLink = screen.getByText('Contact us').closest('a');
     expect(contactLink).toHaveAttribute('href', `mailto:${supportEmail}`);
   });
+
+  it('should call handleHome when the modal is closed', () => {
+    const mockResetError = jest.fn();
+    const mockRouterReplace = jest.fn();
+    mockUseRouter.mockReturnValueOnce({
+      replace: mockRouterReplace,
+    });
+    mockUseErrorStore.mockReturnValueOnce({
+      status: STATUS_OPTIONS[500],
+      message: 'Internal Server Error',
+      resetError: mockResetError,
+    });
+
+    render(<ErrorModal />);
+    fireEvent.click(screen.getByText('Home'));
+    expect(mockResetError).toHaveBeenCalled();
+    expect(mockRouterReplace).toHaveBeenCalledWith('/');
+  });
 });
