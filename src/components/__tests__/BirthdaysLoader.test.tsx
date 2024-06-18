@@ -3,10 +3,6 @@ import BirthdaysLoader from '~/components/BirthdaysLoader';
 
 jest.mock('~/components/DatePicker', () => () => <div>DatePicker Component</div>);
 
-jest.mock('~/app/birthdays/[MM]/[DD]/births', () => ({ births }: { births: any[] }) => (
-  <div>Births Component with {births.length} births</div>
-));
-
 describe('BirthdaysLoader', () => {
   it('renders the header with the correct text', () => {
     render(<BirthdaysLoader />);
@@ -18,8 +14,15 @@ describe('BirthdaysLoader', () => {
     expect(screen.getByText('DatePicker Component')).toBeInTheDocument();
   });
 
-  it('renders the Births component with an empty array', () => {
+  it('renders 10 Skeleton components for the loader list', () => {
     render(<BirthdaysLoader />);
-    expect(screen.getByText('Births Component with 0 births')).toBeInTheDocument();
+    const skeletons = document.querySelectorAll('.animate-pulse.bg-primary\\/10.w-full.rounded-lg.h-4');
+    expect(skeletons).toHaveLength(10);
+  });
+
+  it('renders the Skeleton component in the header', () => {
+    render(<BirthdaysLoader />);
+    const headerSkeleton = document.querySelector('h1 .animate-pulse.bg-primary\\/10.w-24.rounded-lg.h-4');
+    expect(headerSkeleton).toBeInTheDocument();
   });
 });
