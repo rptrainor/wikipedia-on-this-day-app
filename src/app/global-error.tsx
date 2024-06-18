@@ -12,7 +12,7 @@ export default function GlobalError({
   reset: () => void
 }) {
 
-  const { status, message, resetError, setStatus, setMessage } = useErrorStore()
+  const { status, message, resetError, setStatus } = useErrorStore()
   const router = useRouter()
 
   const handleHome = async () => {
@@ -23,8 +23,7 @@ export default function GlobalError({
   useEffect(() => {
     console.error({ error })
     setStatus(STATUS_OPTIONS[500])
-    setMessage(error.message)
-  }, [error, setStatus, setMessage])
+  }, [error, setStatus])
 
   if (status === STATUS_OPTIONS[200]) return null
 

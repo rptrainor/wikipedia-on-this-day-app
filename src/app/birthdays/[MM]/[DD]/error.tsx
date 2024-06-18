@@ -12,12 +12,11 @@ export default function Error({
   reset: () => void
   children: React.ReactNode
 }) {
-  const { setStatus, setMessage } = useErrorStore()
+  const { setStatus } = useErrorStore()
 
   useEffect(() => {
     setStatus(STATUS_OPTIONS[500])
-    setMessage(error.message)
-  }, [error, setStatus, setMessage])
+  }, [error, setStatus])
 
   return (
     <div className="flex flex-col gap-4 max-w-5xl mx-auto text-black bg-background">

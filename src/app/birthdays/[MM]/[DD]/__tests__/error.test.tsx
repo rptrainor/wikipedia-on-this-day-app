@@ -31,7 +31,6 @@ describe('ErrorComponent', () => {
       status: STATUS_OPTIONS[500],
       message: 'Test error message',
       setStatus: jest.fn(),
-      setMessage: jest.fn(),
     });
   });
 
@@ -59,10 +58,8 @@ describe('ErrorComponent', () => {
 
   it('sets the error message and status in the store on mount', () => {
     const setStatusMock = jest.fn();
-    const setMessageMock = jest.fn();
     useErrorStoreMock.mockReturnValue({
       setStatus: setStatusMock,
-      setMessage: setMessageMock,
     });
 
     render(
@@ -72,7 +69,6 @@ describe('ErrorComponent', () => {
     );
 
     expect(setStatusMock).toHaveBeenCalledWith(STATUS_OPTIONS[500]);
-    expect(setMessageMock).toHaveBeenCalledWith('Test error');
   });
 
   it('renders children correctly', () => {

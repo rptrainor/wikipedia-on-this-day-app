@@ -6,7 +6,6 @@ type Store = {
   status: typeof STATUS_OPTIONS[keyof typeof STATUS_OPTIONS];
   message: string;
   setStatus: (status: typeof STATUS_OPTIONS[keyof typeof STATUS_OPTIONS]) => void;
-  setMessage: (message: string) => void;
   resetError: () => void;
 };
 
@@ -18,7 +17,6 @@ const useErrorStore = create<Store>((set) => ({
       set({ status });
     }
   },
-  setMessage: (message) => set({ message }),
   resetError: () => set({ status: STATUS_OPTIONS[200], message: '' }),
 }));
 

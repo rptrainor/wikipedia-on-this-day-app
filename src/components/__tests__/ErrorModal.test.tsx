@@ -48,7 +48,6 @@ describe('ErrorModal', () => {
     render(<ErrorModal />);
 
     expect(screen.getByText('We are sorry, but something went wrong:')).toBeInTheDocument();
-    expect(screen.getByText('Bad Request Error')).toBeInTheDocument();
   });
 
   it('calls resetError and router.replace when Home button is clicked', () => {

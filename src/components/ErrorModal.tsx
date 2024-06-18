@@ -5,7 +5,7 @@ import useErrorStore, { STATUS_OPTIONS } from '~/stores/ErrorStore';
 import { Modal } from './Modal';
 
 const ErrorModal = () => {
-  const { status, message, resetError } = useErrorStore();
+  const { status, resetError } = useErrorStore();
   const router = useRouter();
 
   if (status === STATUS_OPTIONS[200]) return null;
@@ -24,7 +24,6 @@ const ErrorModal = () => {
           <h1 className="w-full text-black sm:text-3xl text-base font-extrabold leading-tight text-balance lowercase">
             We are sorry, but something went wrong:
           </h1>
-          <small className="sm:text-xl text-xs uppercase font-semibold text-balance leading-tight">{message}</small>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 text-center w-full justify-end">
           <button
