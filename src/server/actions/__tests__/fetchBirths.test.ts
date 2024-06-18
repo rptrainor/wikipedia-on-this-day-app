@@ -77,4 +77,39 @@ describe('fetchBirths', () => {
 
     expect(result).toEqual({ births: [] });
   });
+
+  it('handles invalid date format', async () => {
+    const result = await fetchBirths({ MM: '13', DD: '40' });
+
+    expect(result).toEqual({ births: [] });
+  });
+
+  it('handles authorization failure', async () => {
+    (fetch as jest.Mock).mockResolvedValue({
+      ok: false,
+      status: 401,
+      statusText: 'Unauthorized',
+    });
+
+    const result = await fetchBirths({ MM: '01', DD: '01' });
+
+    expect(result).toEqual(new Error('Network response was not ok'));
+  });
+
+  it('handles response timeout', async () => {
+    jest.useFakeTimers();
+    (fetch as jest.Mock).mockImplementation(() =>
+      new Promise((resolve) => setTimeout(() => resolve({ ok: true, json: async () => ({ births: [] }) }), 10000))
+    );
+
+    const fetchPromise = fetchBirths({ MM: '01', DD: '01' });
+
+    jest.runAllTimers();
+
+    const result = await fetchPromise;
+
+    expect(result).toEqual({ births: [] });
+
+    jest.useRealTimers();
+  });
 });
