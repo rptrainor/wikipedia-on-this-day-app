@@ -72,4 +72,44 @@ describe('HomePage', () => {
 
     expect(screen.getByText('DatePicker')).toBeInTheDocument();
   });
+
+  // Additional test cases to cover edge cases and improve robustness
+
+  it('renders correctly on different days', () => {
+    const customDate = new Date(2020, 4, 10); // May 10, 2020
+    jest.spyOn(global, 'Date').mockImplementation(() => customDate);
+
+    render(<HomePage />);
+
+    expect(screen.getByText('Who was born on the 10th of May?')).toBeInTheDocument();
+
+    jest.spyOn(global, 'Date').mockRestore();
+  });
+
+  it('handles edge cases for dates', () => {
+    const customDate = new Date(2020, 0, 1); // January 1, 2020
+    jest.spyOn(global, 'Date').mockImplementation(() => customDate);
+
+    render(<HomePage />);
+
+    expect(screen.getByText('Who was born on the 1st of January?')).toBeInTheDocument();
+
+    jest.spyOn(global, 'Date').mockRestore();
+  });
+
+  it('does not render the link with invalid date', () => {
+    jest.spyOn(Date.prototype, 'getDate').mockReturnValue(NaN);
+    jest.spyOn(Date.prototype, 'getMonth').mockReturnValue(NaN);
+
+    render(<HomePage />);
+
+    const link = screen.queryByRole('link', {
+      name: /Who was born on the/,
+    });
+
+    expect(link).toBeNull();
+
+    jest.spyOn(Date.prototype, 'getDate').mockRestore();
+    jest.spyOn(Date.prototype, 'getMonth').mockRestore();
+  });
 });
