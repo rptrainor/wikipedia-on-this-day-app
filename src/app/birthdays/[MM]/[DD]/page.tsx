@@ -5,9 +5,24 @@ import { getOrdinalSuffix, getMonthName } from '~/lib/utils';
 import DatePicker from '~/components/DatePicker';
 import { preload, fetchBirths } from '~/server/actions/fetchBirths';
 
+const isValidDate = (month: number, day: number) => {
+  return (
+    !isNaN(month) &&
+    !isNaN(day) &&
+    month >= 1 &&
+    month <= 12 &&
+    day >= 1 &&
+    day <= new Date(2020, month, 0).getDate()
+  );
+};
+
 export default async function BirthdaysPage({ params }: { params: { MM: string, DD: string } }) {
   const monthNumber = parseInt(params.MM, 10);
   const dayNumber = parseInt(params.DD, 10);
+
+  if (!isValidDate(monthNumber, dayNumber)) {
+    throw new Error('Invalid date');
+  }
 
   preload({ MM: params.MM, DD: params.DD });
   const monthName = getMonthName(monthNumber);
@@ -18,7 +33,7 @@ export default async function BirthdaysPage({ params }: { params: { MM: string, 
     if (response instanceof Error) throw response
     births = response.births;
   } catch (error) {
-    throw new Error('please enter a valid date');
+    throw new Error('Please enter a valid date');
   }
 
   return (
@@ -29,7 +44,7 @@ export default async function BirthdaysPage({ params }: { params: { MM: string, 
           <DatePicker />
         </div>
       </div>
-      <Suspense fallback={<Births births={births} />}>
+      <Suspense fallback={<Births births={[]} />}>
         <Births births={births} />
       </Suspense>
     </div>

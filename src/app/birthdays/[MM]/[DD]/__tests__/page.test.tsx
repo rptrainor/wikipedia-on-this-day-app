@@ -63,11 +63,10 @@ describe('BirthdaysPage', () => {
   });
 
   it('throws an error for invalid date', async () => {
-    (fetchBirths as jest.Mock).mockRejectedValue(new Error('Invalid date'));
-
+    const invalidParams = { MM: '13', DD: '40' }; // Invalid date
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-    await expect(async () => render(await BirthdaysPage({ params }))).rejects.toThrow('please enter a valid date');
+    await expect(async () => render(await BirthdaysPage({ params: invalidParams }))).rejects.toThrow('Invalid date');
 
     consoleErrorSpy.mockRestore();
   });
@@ -80,5 +79,15 @@ describe('BirthdaysPage', () => {
     render(await BirthdaysPage({ params }));
 
     expect(screen.getByText(/Births/)).toBeInTheDocument();
+  });
+
+  it('renders error message for valid but non-existent date', async () => {
+    (fetchBirths as jest.Mock).mockRejectedValue(new Error('Please enter a valid date'));
+
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    await expect(async () => render(await BirthdaysPage({ params }))).rejects.toThrow('Please enter a valid date');
+
+    consoleErrorSpy.mockRestore();
   });
 });
